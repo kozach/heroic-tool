@@ -1,12 +1,7 @@
 # Hiframework
 Tools to automate the process of development static sites.
 
-Gulp
-Jade
-SASS
-Bower
-srvdir
-Foundation
+Gulp, Jade, SASS, Bower, srvdir, Foundation
 
 ## Installation
 First, ensure that you have the latest Node.js, npm and Bower installed.
@@ -18,7 +13,6 @@ npm install
 bower install
 ```
 ## Usage
-
 gulp - generate development files
 gulp watch - watch for changes and auto generate development files
 gulp --type=prod - generate production files
