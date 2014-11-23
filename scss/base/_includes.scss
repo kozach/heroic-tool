@@ -1,0 +1,26 @@
+%animated {
+    -webkit-transform: translateZ(0);-moz-transform: translateZ(0);transform: translateZ(0);
+}
+%selection {
+    user-select: text!important;
+    &::selection {
+        background-color: rgba(0,0,0,.5)!important;
+    }
+}
+%allign-center {
+	text-align: center;
+}
+%allign-right {
+	text-align: right;
+}
+%centered {
+	text-align: center;
+    margin: 0 auto;
+    display: block;	
+}
+%float-left {
+	float: left;
+}
+%float-right {
+	float: right;
+}

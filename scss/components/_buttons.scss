@@ -1,0 +1,18 @@
+%button {
+    width: rem-calc(250);
+	background-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	line-height: normal;
+	margin: 0;
+	position: relative;
+	text-decoration: none;
+	text-align: center;
+	display: inline-block;
+	padding: rem-calc(16) 0;
+	border: 1px solid #1f1f1f;
+	transition: background-color 1s;
+	&:hover {
+        color: white;
+		background-color: #1f1f1f;  
+	}
+}

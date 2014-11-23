@@ -1,0 +1,24 @@
+// $webp-images: (
+//     'image1',
+//     'image2',
+//     'image3'
+// );
+// @include webp-image($webp-images, "png");
+// .container {
+// 	@extend %image1;
+// }
+// 
+@mixin webp-image($names, $type) {
+	@each $name in $names {
+		.js %#{$name} {
+			background-image: none;
+		}
+		.no-js %#{$name},
+		.js.no-webp %#{$name} {
+			background-image: url('/images/#{$name}.%#{$type}');
+		}
+		.js.webp %#{$name} {
+			background-image: url('/images/#{$name}.webp');
+		}	
+	}
+}

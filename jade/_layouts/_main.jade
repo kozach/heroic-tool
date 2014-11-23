@@ -1,0 +1,20 @@
+block vars
+include /_functions/_nav
+
+doctype html
+html.no-js(lang=lang class=page)
+	head
+		include /_includes/_html/_meta.html
+		block meta
+		block title
+			title 
+				|Site Name 
+				=title
+		include /_includes/_html/_styles.html
+		block styles
+		include /_includes/_html/_topscripts.html
+		block topscripts
+	body
+		block content
+		include /_includes/_html/_botscripts.html
+		block botscripts

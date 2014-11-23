@@ -1,0 +1,32 @@
+{
+  "devDependencies": {
+    "gulp": "~3.8.5",
+    "gulp-uglify": "~0.3.1",
+    "gulp-rimraf": "~0.1.0",
+    "gulp-ruby-sass": "~0.5.0",
+    "gulp-imagemin": "~0.6.1",
+    "gulp-jade": "~0.7.0",
+    "gulp-if": "~1.2.1",
+    "gulp-usemin-query": "0.0.1",
+    "gulp-plumber": "~0.6.3",
+    "gulp-htmlmin": "~0.2.0",
+    "gulp-uncss": "~0.4.4",
+    "gulp-csso": "~0.2.9",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-chmod": "~0.2.1",
+    "gulp-jshint": "~1.6.4",
+    "gulp-htmlhint": "0.0.8",
+    "gulp-csslint": "~0.1.4",
+    "gulp-jslint": "~0.1.0",
+    "gulp-filter": "~0.5.0",
+    "gulp-load-plugins": "~0.5.3",
+    "browser-sync": "~1.1.2",
+    "gulp-util": "~3.0.1",
+    "gulp-usemin": "~0.3.8",
+    "gulp-run": "~1.6.4",
+    "run-sequence": "~0.3.6",
+    "gulp-sitemap": "~0.5.0",
+    "gulp-webp": "~2.0.0",
+    "gulp-header": "~1.2.2"
+  }
+}

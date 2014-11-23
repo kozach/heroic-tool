@@ -1,0 +1,6 @@
+{
+  "name": "Hiframework",
+  "dependencies": {
+    "foundation": "5.3.3"
+  }
+}
