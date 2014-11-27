@@ -30,6 +30,39 @@ var onError = function(err) {
     console.log(err);
 };
 
+var getStamp = function() {
+    var myDate = new Date();
+
+    var myYear = myDate.getFullYear().toString();
+    var myMonth = ('0' + (myDate.getMonth() + 1)).slice(-2);
+    var myDay = ('0' + myDate.getDate()).slice(-2);
+    var mySeconds = myDate.getSeconds().toString();
+
+    var myFullDate = myYear + myMonth + myDay + mySeconds;
+
+    return myFullDate;
+};
+
+var patterns = [{
+    pattern: /\.css/g,
+    replacement: '\.css?' + getStamp()
+}, {
+    pattern: /\.js/g,
+    replacement: '\.js?' + getStamp()
+}, {
+    pattern: /\.jpg/g,
+    replacement: '\.jpg?' + getStamp()
+}, {
+    pattern: /\.ico/g,
+    replacement: '\.ico?' + getStamp()
+}, {
+    pattern: /\.svg/g,
+    replacement: '\.svg?' + getStamp()
+}, {
+    pattern: /\.png/g,
+    replacement: '\.png?' + getStamp()
+}, ];
+
 gulp.task('browser-sync', function() {
     browserSync.init(null, {
         server: {
@@ -117,7 +150,10 @@ gulp.task('jade-pre', function() {
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso())
             ],
-            js: [$.if($.util.env.type === 'prod', $.uglify()),$.header(copytext)]
+            js: [
+                $.if($.util.env.type === 'prod', $.uglify()),
+                $.header(copytext)
+            ]
         }))
         .pipe(filterUsemin)
         .pipe(gulp.dest('build'))
@@ -145,7 +181,10 @@ gulp.task('jade-post', function() {
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso())
             ],
-            js: [$.if($.util.env.type === 'prod', $.uglify()),$.header(copytext)]
+            js: [
+                $.if($.util.env.type === 'prod', $.uglify()),
+                $.header(copytext)
+            ]
         }))
         .pipe(gulp.dest('build'))
         .pipe($.if(watch, reload({stream: true})));
@@ -190,11 +229,17 @@ gulp.task('images-gen', function() {
         .pipe(gulp.dest('images'));
 });
 
+gulp.task('cachebust', function () {
+    return gulp.src('./build/**/*.+(html|css)')
+        .pipe($.frep(patterns))
+        .pipe(gulp.dest('build'))
+});
+
 // Tasks
 gulp.task('jade', function(callback) {
     runSequence('jade-pre',
                 'jade-post',
-                'sitemap',
+                ['sitemap','cachebust'],
                 callback);
 });
 
