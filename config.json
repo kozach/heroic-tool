@@ -13,5 +13,6 @@
 	    "last 2 version",
 	    "> 1%",
 	    "ie 8"
-	]
+	],
+	"copyright": "/*!\n* Copyrights of all used libraries are written to a file human.txt and is at the root of site\n*/\n\n"
 }

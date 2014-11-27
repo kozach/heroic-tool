@@ -23,7 +23,7 @@ var gulp = require('gulp'),
 // gulp --type prod
 
 var watch = false;
-var copytext = "/*!\n* Copyrights of all used libraries are written to a file human.txt and is at the root of site\n*/\n\n";
+var copytext = config.copyright;
 
 var onError = function(err) {
     $.util.beep();
