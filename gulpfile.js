@@ -76,21 +76,6 @@ gulp.task('proxy', function() {
         .pipe($.run('./srvdir '+config.glob.proxy+':./build'));
 });
 
-// Files analize
-gulp.task('analize', function() {
-    gulp.src('js/**/*.js')
-        .pipe($.jshint())
-        .pipe($.jshint.reporter());
-    gulp.src("build/**/*.html")
-        .pipe($.htmlhint())
-        .pipe($.htmlhint.reporter());
-    gulp.src('build/css/*.css')
-        .pipe($.csslint())
-        .pipe($.csslint.reporter());
-    gulp.src('js/**/*.js')
-        .pipe($.jslint());
-});
-
 // chmod
 // gulp.task('chmod', function () {
 //     return gulp.src('build/**/*')
