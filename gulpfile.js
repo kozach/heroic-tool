@@ -133,7 +133,7 @@ gulp.task('jade-pre', function() {
             css: [        
                 //($.if(env === 'production', $.uncss(config.uncss))),
                 $.autoprefixer(config.autoprefixer),
-                $.if($.util.env.type === 'prod', $.csso())
+                $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
@@ -162,9 +162,9 @@ gulp.task('jade-post', function() {
                 keepClosingSlash: true
             }))],
             css: [        
-                //($.if(env === 'production', $.uncss(config.uncss))),
+                // ($.if(env === 'production', $.uncss(config.uncss))),
                 $.autoprefixer(config.autoprefixer),
-                $.if($.util.env.type === 'prod', $.csso())
+                $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
