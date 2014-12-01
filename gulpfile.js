@@ -15,11 +15,6 @@ var gulp = require('gulp'),
 //     });
 // });
 
-//gulp-svgmin
-//gulp-svg2png
-//gulp-data
-//gulp-cssshrink
-
 // gulp --type prod
 
 var watch = false;
@@ -76,12 +71,11 @@ gulp.task('proxy', function() {
         .pipe($.run('./srvdir '+config.glob.proxy+':./build'));
 });
 
-// chmod
-// gulp.task('chmod', function () {
-//     return gulp.src('build/**/*')
-//         .pipe($.chmod(644))
-//         .pipe(gulp.dest('build'));
-// });
+gulp.task('chmod', function () {
+    return gulp.src('build/**/*')
+        .pipe($.chmod(644))
+        .pipe(gulp.dest('build'));
+});
 
 gulp.task('sitemap', function () {
     gulp.src('build/**/*.html', {
@@ -93,7 +87,6 @@ gulp.task('sitemap', function () {
     .pipe(gulp.dest('build/'));
 });
 
-// Clean
 gulp.task('clean', function() {
     return gulp.src(['./build/', '.sass-cache/', './.tmp', './jade/_includes/_html/'], {
             read: false
@@ -104,7 +97,6 @@ gulp.task('clean', function() {
         .pipe($.rimraf());
 });
 
-// Files
 gulp.task('files', function() {
     return gulp.src(['./files/**/*', './files/**/.*', '!./files/**/.DS_Store'])
         .pipe($.plumber({
@@ -114,7 +106,6 @@ gulp.task('files', function() {
         .pipe($.if(watch, reload({stream: true})));
 });
 
-// HTML
 gulp.task('jade-pre', function() {
     var filterUsemin = $.filter('**/*.+(js|css)');
     return gulp.src(['jade/_includes/_*.jade'])
@@ -175,7 +166,6 @@ gulp.task('jade-post', function() {
         .pipe($.if(watch, reload({stream: true})));
 });
 
-// CSS
 gulp.task('sass', function() {
     return gulp.src('scss/**/*.scss')
         .pipe($.plumber({
@@ -189,7 +179,6 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('.tmp/css'));
 });
 
-// Images
 gulp.task('images', function() {
     return gulp.src(['images/**/*', '!images/base64/**/*', '!images/base64'])
         .pipe($.plumber({
@@ -220,7 +209,6 @@ gulp.task('cachebust', function () {
         .pipe(gulp.dest('build'))
 });
 
-// Tasks
 gulp.task('jade', function(callback) {
     runSequence('jade-pre',
                 'jade-post',
