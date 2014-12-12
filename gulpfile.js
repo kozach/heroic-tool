@@ -68,23 +68,29 @@ gulp.task('browser-sync', function() {
 
 gulp.task('proxy', function() {
     gulp.src('/')
-        .pipe($.run('./srvdir '+config.glob.proxy+':./build'));
+        .pipe($.run('./srvdir ' + config.glob.proxy + ':./build'));
 });
 
-gulp.task('chmod', function () {
+gulp.task('clean-url', function(){
+  gulp.src('build/**/*.html')
+    .pipe($.replace(/\.html/g, ''))
+    .pipe(gulp.dest('build'));
+});
+
+gulp.task('chmod', function() {
     return gulp.src('build/**/*')
         .pipe($.chmod(644))
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('sitemap', function () {
+gulp.task('sitemap', function() {
     gulp.src('build/**/*.html', {
-        read: false
-    })
-    .pipe($.sitemap({
-        siteUrl: config.glob.site
-    }))
-    .pipe(gulp.dest('build/'));
+            read: false
+        })
+        .pipe($.sitemap({
+            siteUrl: config.glob.site
+        }))
+        .pipe(gulp.dest('build/'));
 });
 
 gulp.task('clean', function() {
@@ -103,7 +109,9 @@ gulp.task('files', function() {
             errorHandler: onError
         }))
         .pipe(gulp.dest('build'))
-        .pipe($.if(watch, reload({stream: true})));
+        .pipe($.if(watch, reload({
+            stream: true
+        })));
 });
 
 gulp.task('jade-pre', function() {
@@ -121,7 +129,7 @@ gulp.task('jade-pre', function() {
                 collapseWhitespace: true,
                 keepClosingSlash: true
             }))],
-            css: [        
+            css: [
                 //($.if(env === 'production', $.uncss(config.uncss))),
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
@@ -152,7 +160,7 @@ gulp.task('jade-post', function() {
                 collapseWhitespace: true,
                 keepClosingSlash: true
             }))],
-            css: [        
+            css: [
                 // ($.if(env === 'production', $.uncss(config.uncss))),
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
@@ -163,7 +171,9 @@ gulp.task('jade-post', function() {
             ]
         }))
         .pipe(gulp.dest('build'))
-        .pipe($.if(watch, reload({stream: true})));
+        .pipe($.if(watch, reload({
+            stream: true
+        })));
 });
 
 gulp.task('sass', function() {
@@ -188,7 +198,9 @@ gulp.task('images', function() {
         .pipe($.filter('**/*.+(jpg|jpeg|png)'))
         .pipe($.webp())
         .pipe(gulp.dest('build/images'))
-        .pipe($.if(watch, reload({stream: true})));
+        .pipe($.if(watch, reload({
+            stream: true
+        })));
 });
 gulp.task('images-gen', function() {
     return gulp.src(['images/**/*'])
@@ -203,7 +215,7 @@ gulp.task('images-gen', function() {
         .pipe(gulp.dest('images'));
 });
 
-gulp.task('cachebust', function () {
+gulp.task('cachebust', function() {
     return gulp.src('./build/**/*.+(html|css)')
         .pipe($.frep(patterns))
         .pipe(gulp.dest('build'))
@@ -211,22 +223,20 @@ gulp.task('cachebust', function () {
 
 gulp.task('jade', function(callback) {
     runSequence('jade-pre',
-                'jade-post',
-                ['sitemap','cachebust'],
-                callback);
+        'jade-post', ['sitemap', 'cachebust'],
+        callback);
 });
 
 gulp.task('css', function(callback) {
     runSequence('sass',
-                'jade',
-                callback);
+        'jade',
+        callback);
 });
 
 gulp.task('default', function(callback) {
-    runSequence('clean',
-                ['sass', 'images', 'files'],
-                'jade',
-                callback);
+    runSequence('clean', ['sass', 'images', 'files'],
+        'jade',
+        callback);
 });
 
 gulp.task('watch', ['default', 'browser-sync'], function() {
