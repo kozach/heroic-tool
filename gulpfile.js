@@ -5,15 +5,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
     config = require('./config.json'),
-    fs = require('fs'),
     runSequence = require('run-sequence');
-
-// gulp.task('get', function() {
-//     fs.readdir('./build', function(err, files) {
-//         files.filter(function(file) { return file.substr(-5) === '.html'; })
-//              .forEach(function(file) { console.log(file) });
-//     });
-// });
 
 // gulp --type prod
 
