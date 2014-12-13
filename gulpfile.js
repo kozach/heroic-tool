@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
     config = require('./config.json'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    glob = require('glob');
 
 // gulp --type prod
 
@@ -122,7 +123,7 @@ gulp.task('jade-pre', function() {
                 keepClosingSlash: true
             }))],
             css: [
-                //($.if(env === 'production', $.uncss(config.uncss))),
+                //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
             ],
@@ -153,7 +154,7 @@ gulp.task('jade-post', function() {
                 keepClosingSlash: true
             }))],
             css: [
-                // ($.if(env === 'production', $.uncss(config.uncss))),
+                //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
             ],

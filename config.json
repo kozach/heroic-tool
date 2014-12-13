@@ -4,7 +4,6 @@
 		"proxy": "example"
 	},
 	"uncss":{
-        "html": ["build/index.html", "build/404.html"],
         "ignore": [
         	".error", ".active"
         ]
