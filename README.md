@@ -7,8 +7,8 @@ Gulp, Jade, SASS, Bower, srvdir, Foundation
 First, ensure that you have the latest Node.js, npm and Bower installed.
 
 ```
-git clone git@github.com:kozach/hiframework.git
-cd hiframework
+git clone git@github.com:kozach/heroic-tool.git
+cd heroic-tool
 npm install
 bower install
 ```
