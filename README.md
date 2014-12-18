@@ -1,4 +1,4 @@
-# Hiframework
+# Heroic Tool
 Tools to automate the process of development static sites.
 
 Gulp, Jade, SASS, Bower, srvdir, Foundation
