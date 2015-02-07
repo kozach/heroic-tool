@@ -125,7 +125,8 @@ gulp.task('jade-pre', function() {
             css: [
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
-                $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
+                $.if($.util.env.type === 'prod', $.csso()),
+                $.if($.util.env.type === 'prod', $.cssshrink())
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
@@ -156,7 +157,8 @@ gulp.task('jade-post', function() {
             css: [
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
-                $.if($.util.env.type === 'prod', $.csso(), $.cssshrink())
+                $.if($.util.env.type === 'prod', $.csso()),
+                $.if($.util.env.type === 'prod', $.cssshrink())
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
