@@ -32,33 +32,33 @@ var getStamp = function() {
 };
 
 var patternsHTML = [{
-    pattern: /\.css/g,
+    pattern: /\.css(?=[',"])/g,
     replacement: '\.css?' + getStamp()
 }, {
-    pattern: /\.js/g,
+    pattern: /\.js(?=[',"])/g,
     replacement: '\.js?' + getStamp()
 }, {
-    pattern: /\.jpg/g,
+    pattern: /\.jpg(?=[',"])/g,
     replacement: '\.jpg?' + getStamp()
 }, {
-    pattern: /\.ico/g,
+    pattern: /\.ico(?=[',"])/g,
     replacement: '\.ico?' + getStamp()
 }, {
-    pattern: /\.svg/g,
+    pattern: /\.svg(?=[',"])/g,
     replacement: '\.svg?' + getStamp()
 }, {
-    pattern: /\.png/g,
+    pattern: /\.png(?=[',"])/g,
     replacement: '\.png?' + getStamp()
 }, ];
 
 var patternsCSS = [{
-    pattern: /\.jpg/g,
+    pattern: /\.jpg(?=[',"])/g,
     replacement: '\.jpg?' + getStamp()
 }, {
-    pattern: /\.svg/g,
+    pattern: /\.svg(?=[',"])/g,
     replacement: '\.svg?' + getStamp()
 }, {
-    pattern: /\.png/g,
+    pattern: /\.png(?=[',"])/g,
     replacement: '\.png?' + getStamp()
 }, ];
 
