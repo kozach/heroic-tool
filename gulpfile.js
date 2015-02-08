@@ -31,7 +31,7 @@ var getStamp = function() {
     return myFullDate;
 };
 
-var patterns = [{
+var patternsHTML = [{
     pattern: /\.css/g,
     replacement: '\.css?' + getStamp()
 }, {
@@ -43,6 +43,17 @@ var patterns = [{
 }, {
     pattern: /\.ico/g,
     replacement: '\.ico?' + getStamp()
+}, {
+    pattern: /\.svg/g,
+    replacement: '\.svg?' + getStamp()
+}, {
+    pattern: /\.png/g,
+    replacement: '\.png?' + getStamp()
+}, ];
+
+var patternsCSS = [{
+    pattern: /\.jpg/g,
+    replacement: '\.jpg?' + getStamp()
 }, {
     pattern: /\.svg/g,
     replacement: '\.svg?' + getStamp()
@@ -210,26 +221,43 @@ gulp.task('images-gen', function() {
         .pipe(gulp.dest('images'));
 });
 
-gulp.task('cachebust', function() {
-    return gulp.src('./build/**/*.+(html|css)')
-        .pipe($.frep(patterns))
+gulp.task('cachebust:css', function() {
+    return gulp.src('./build/**/*.css')
+        .pipe($.frep(patternsCSS))
         .pipe(gulp.dest('build'))
 });
 
+gulp.task('cachebust:html', function() {
+    return gulp.src('./build/**/*.html')
+        .pipe($.frep(patternsHTML))
+        .pipe(gulp.dest('build'))
+});
+
+gulp.task('cachebust', function(callback) {
+    runSequence(
+        ['cachebust:css','cachebust:html'],
+        callback);
+});
+
 gulp.task('jade', function(callback) {
-    runSequence('jade-pre',
-        'jade-post', ['sitemap', 'cachebust'],
+    runSequence(
+        'jade-pre',
+        'jade-post',
+        ['sitemap', 'cachebust'],
         callback);
 });
 
 gulp.task('css', function(callback) {
-    runSequence('sass',
+    runSequence(
+        'sass',
         'jade',
         callback);
 });
 
 gulp.task('default', function(callback) {
-    runSequence('clean', ['sass', 'images', 'files'],
+    runSequence(
+        'clean',
+        ['sass', 'images', 'files'],
         'jade',
         callback);
 });
