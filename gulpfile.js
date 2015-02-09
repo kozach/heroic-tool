@@ -201,9 +201,9 @@ gulp.task('images', function() {
             errorHandler: onError
         }))
         .pipe(gulp.dest('build/images'))
-        .pipe($.filter('**/*.+(jpg|jpeg|png)'))
-        .pipe($.webp())
-        .pipe(gulp.dest('build/images'))
+        // .pipe($.filter('**/*.+(jpg|jpeg|png)'))
+        // .pipe($.webp())
+        // .pipe(gulp.dest('build/images'))
         .pipe($.if(watch, reload({
             stream: true
         })));
