@@ -119,7 +119,9 @@ gulp.task('files', function() {
 });
 
 gulp.task('jade-pre', function() {
-    var filterUsemin = $.filter('**/*.+(js|css)');
+
+    var filterAssets = $.filter('**/*.+(js|css)');
+
     return gulp.src(['jade/_includes/_*.jade'])
         .pipe($.plumber({
             errorHandler: onError
@@ -129,10 +131,6 @@ gulp.task('jade-pre', function() {
         }))
         .pipe($.usemin({
             assetsDir: './',
-            html: [$.if($.util.env.type === 'prod', $.htmlmin({
-                collapseWhitespace: true,
-                keepClosingSlash: true
-            }))],
             css: [
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
@@ -144,11 +142,14 @@ gulp.task('jade-pre', function() {
                 $.header(copytext)
             ]
         }))
-        .pipe(filterUsemin)
+        .pipe(filterAssets)
         .pipe(gulp.dest('build'))
-        .pipe(filterUsemin.restore())
-        .pipe($.filter('**/*.+(html)'))
-        .pipe(gulp.dest('jade/_includes/_html'));
+        .pipe(filterAssets.restore())
+        .pipe($.if(($.util.env.type === 'prod') && '*.html', $.htmlmin({
+            collapseWhitespace: true,
+            keepClosingSlash: true
+        })))
+        .pipe(gulp.dest('jade/_includes/_html'))
 });
 gulp.task('jade-post', function() {
     return gulp.src(['jade/**/*.jade', '!jade/**/_*'])
@@ -161,10 +162,6 @@ gulp.task('jade-post', function() {
         }))
         .pipe($.usemin({
             assetsDir: './',
-            html: [$.if($.util.env.type === 'prod', $.htmlmin({
-                collapseWhitespace: true,
-                keepClosingSlash: true
-            }))],
             css: [
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
@@ -176,6 +173,10 @@ gulp.task('jade-post', function() {
                 $.header(copytext)
             ]
         }))
+        .pipe($.if(($.util.env.type === 'prod') && '*.html', $.htmlmin({
+            collapseWhitespace: true,
+            keepClosingSlash: true
+        })))
         .pipe(gulp.dest('build'))
         .pipe($.if(watch, reload({
             stream: true
