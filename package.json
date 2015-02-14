@@ -30,7 +30,7 @@
     "gulp-sitemap": "~0.5.0",
     "gulp-uglify": "~0.3.1",
     "gulp-uncss": "~0.4.4",
-    "gulp-usemin": "~0.3.8",
+    "gulp-usemin": "^0.3.11",
     "gulp-util": "~3.0.1",
     "gulp-webp": "~2.0.0",
     "imagemin-gifsicle": "^4.1.0",
