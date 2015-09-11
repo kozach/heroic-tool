@@ -120,7 +120,7 @@ gulp.task('files', function() {
 
 gulp.task('jade-pre', function() {
 
-    var filterAssets = $.filter('**/*.+(js|css)');
+    var filterAssets = $.filter(['**/*.+(js|css)'], {restore: true});
 
     return gulp.src(['jade/_includes/_*.jade'])
         .pipe($.plumber({
@@ -144,7 +144,7 @@ gulp.task('jade-pre', function() {
         }))
         .pipe(filterAssets)
         .pipe(gulp.dest('build'))
-        .pipe(filterAssets.restore())
+        .pipe(filterAssets.restore)
         .pipe($.if(($.util.env.type === 'prod') && '*.html', $.htmlmin({
             collapseWhitespace: true,
             keepClosingSlash: true
@@ -183,17 +183,29 @@ gulp.task('jade-post', function() {
         })));
 });
 
-gulp.task('sass', function() {
-    return gulp.src('scss/**/*.scss')
-        .pipe($.plumber({
-            errorHandler: onError
-        }))
-        .pipe($.rubySass({
-            loadPath: 'bower_components/foundation/scss',
-            style: 'compact',
-            compass: true
-        }))
-        .pipe(gulp.dest('.tmp/css'));
+// gulp.task('sass', function() {
+//     return gulp.src('scss/**/*.scss')
+//         .pipe($.plumber({
+//             errorHandler: onError
+//         }))
+//         .pipe($.rubySass({
+//             loadPath: 'bower_components/foundation/scss',
+//             style: 'compact',
+//             compass: true
+//         }))
+//         .pipe(gulp.dest('.tmp/css'));
+// });
+
+gulp.task('sass', function () {
+  return $.rubySass('scss/**/*.scss', {
+        loadPath: 'bower_components/foundation/scss',
+        style: 'compact',
+        compass: true
+    })
+    .pipe($.plumber({
+        errorHandler: onError
+    }))
+    .pipe(gulp.dest('.tmp/css'));
 });
 
 gulp.task('images', function() {
