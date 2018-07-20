@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     reload = browserSync.reload,
     config = require('./config.json'),
     runSequence = require('run-sequence'),
+    cssnano = require('gulp-cssnano'),
     glob = require('glob');
 
 // gulp --type prod
@@ -135,7 +136,7 @@ gulp.task('jade-pre', function() {
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso()),
-                $.if($.util.env.type === 'prod', $.cssshrink())
+                $.if($.util.env.type === 'prod', $.cssnano())
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
@@ -145,10 +146,10 @@ gulp.task('jade-pre', function() {
         .pipe(filterAssets)
         .pipe(gulp.dest('build'))
         .pipe(filterAssets.restore)
-        .pipe($.if(($.util.env.type === 'prod') && '*.html', $.htmlmin({
-            collapseWhitespace: true,
-            keepClosingSlash: true
-        })))
+        // .pipe($.if(($.util.env.type === 'prod') && '*.html', $.htmlmin({
+        //     collapseWhitespace: true,
+        //     keepClosingSlash: true
+        // })))
         .pipe(gulp.dest('jade/_includes/_html'))
 });
 gulp.task('jade-post', function() {
@@ -166,7 +167,7 @@ gulp.task('jade-post', function() {
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
                 $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso()),
-                $.if($.util.env.type === 'prod', $.cssshrink())
+                $.if($.util.env.type === 'prod', $.cssnano())
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
