@@ -130,9 +130,11 @@ gulp.task('jade-pre', function() {
             assetsDir: './',
             css: [
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
-                $.autoprefixer(config.autoprefixer),
+                // $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso()),
-                $.if($.util.env.type === 'prod', $.cssnano())
+                $.if($.util.env.type === 'prod', $.cssnano({
+                        autoprefixer: config.autoprefixer
+                  }))
             ],
             js: [
                 $.if($.util.env.type === 'prod', $.uglify()),
@@ -161,7 +163,7 @@ gulp.task('jade-post', function() {
             assetsDir: './',
             css: [
                 //($.if(env === 'production', $.uncss({ html: $.glob.sync('build/**/*.html') }))),
-                $.autoprefixer(config.autoprefixer),
+                // $.autoprefixer(config.autoprefixer),
                 $.if($.util.env.type === 'prod', $.csso())
             ],
             js: [
@@ -270,5 +272,5 @@ gulp.task('watch', ['default', 'browser-sync'], function() {
     gulp.watch(['jade/**/*.jade'], ['jade', reload]);
     gulp.watch(['js/**/*.js'], ['jade', reload]);
     gulp.watch(['images/**/*'], ['images', reload]);
-    gulp.watch(['./files/**/*', './files/**/.*', '!./files/**/.DS_Store'], ['files', reload]);
+    gulp.watch(['./files/**/*', './files/**/.*', '!./files/**/.DS_Store'], ['default', reload]);
 });
