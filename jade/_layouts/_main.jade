@@ -1,20 +1,26 @@
 block vars
 include /_functions/_nav
 
+-var htmlurl = '';
+-var siteURL = '';
+if htmlurl == '.html'
+	-var htmlindexurl = '/index.html';
+else
+	-var htmlindexurl = '';
+
 doctype html
 html.no-js(lang=lang class=page)
 	head
-		include /_includes/_html/_meta.html
+		include /_includes/_meta
 		block meta
 		block title
-			title 
-				|Site Name 
-				=title
-		include /_includes/_html/_styles.html
-		block styles
-		include /_includes/_html/_topscripts.html
+			title Site Name #{title}
+		link(rel='author', href='humans.txt')
+		link(rel='stylesheet', type='text/css', href=siteURL+'/css/main.css')
+		block topstyles
 		block topscripts
 	body
 		block content
-		include /_includes/_html/_botscripts.html
+		block botstyles
+		script(src=siteURL+'/js/compiled.js')
 		block botscripts

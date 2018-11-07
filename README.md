@@ -17,8 +17,7 @@ bower install
 ```
 gulp - generate development files
 gulp watch - watch for changes and auto generate development files
-gulp --type=prod - generate production files
-gulp proxy - start sharing /build folder
+gulp --env=prod - generate production files
 gulp images-gen - replacing images optimized version of their
 ```
 The resulting files are in the folder /build

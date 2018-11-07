@@ -1,0 +1,94 @@
+{
+	"hosting":
+	{
+		"public": "buil",
+		"ignore": [
+			"_OLD",
+			"_STORAGE",
+			"bower_components",
+			"files",
+			"images",
+			"jade",
+			"js",
+			"node_modules",
+			"scss",
+			".bowerrc",
+			".gitignore",
+			".gulpenvrc",
+			".nvmrc",
+			"bower.json",
+			"config.json",
+			"Gemfile",
+			"gulpfile.js",
+			"LICENSE",
+			"package.json",
+			"README.md"
+		],
+		"redirects": [
+		{
+			"source": "/",
+			"destination": "/en",
+			"type": 301
+		}],
+		"rewrites": [
+		{
+			"source": "/en/**",
+			"destination": "/en/404.html"
+		},
+		{
+			"source": "/ru/**",
+			"destination": "/ru/404.html"
+		},
+		{
+			"source": "/ua/**",
+			"destination": "/ua/404.html"
+		},
+		{
+			"source": "**",
+			"destination": "/en/404.html"
+		}],
+		"cleanUrls": true,
+		"trailingSlash": false,
+		"headers": [
+		{
+			"source": "**/*.html",
+			"headers": [
+			{
+				"key": "Cache-Control",
+				"value": "max-age=0, no-cache"
+			}]
+		},
+		{
+			"source": "**/*.@(jpg|jpeg|gif|png|ico|webp|svg)",
+			"headers": [
+			{
+				"key": "Cache-Control",
+				"value": "max-age=30672000"
+			}]
+		},
+		{
+			"source": "**/*.@(css|js)",
+			"headers": [
+			{
+				"key": "Cache-Control",
+				"value": "max-age=30672000"
+			}]
+		},
+		{
+			"source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+			"headers": [
+			{
+				"key": "Access-Control-Allow-Origin",
+				"value": "*"
+			}]
+		},
+		{
+			"source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+			"headers": [
+			{
+				"key": "Cache-Control",
+				"value": "max-age=30672000"
+			}]
+		}]
+	}
+}

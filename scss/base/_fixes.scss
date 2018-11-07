@@ -1,6 +1,48 @@
-:focus {
+:focus, a:focus {
     outline: none!important;
 }
+html {
+// fix hamburger hover
+	touch-action: manipulation;
+
+// fix font
+	-moz-osx-font-smoothing: grayscale; /*(For Firefox)*/
+	-webkit-font-smoothing: antialiased; /*(For Chrome and Safari)*/
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	font-smoothing: antialiased;
+	// &.page-404 {
+		// height: 100%;
+		// background-color: #2a2a2a;
+	// }
+}
+
+// #perspective > .container .wrapper {
+// 	min-height: 100vh;
+// 	background-color: #2a2a2a;
+// }
+
 body {
     user-select: none;
+}
+
+.br {
+	display: block;
+}
+
+//fix android random text resizing
+* {
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+    min-height: 1px;
+    max-height: 999999px;
+}
+
+.clearfix:after {
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
 }

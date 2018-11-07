@@ -1,13 +1,31 @@
 {
 	"glob":
 	{
-		"site": "http://example.com",
-		"proxy": "example"
+		"site": "https://example.com"
 	},
 	"uncss":
 	{
 		"ignore": [
 			".error", ".active"
+		]
+	},
+	"js":
+	{
+		"include": [
+			"js/app.js"
+		],
+		"exclude": [
+			"js/modernizr.js",
+			"bower_components/jquery/dist/jquery.min.js",
+			"bower_components/classie/classie.js",
+			"js/images-loader.js",
+			"js/midnight.jquery.min.js",
+			"js/socialfeed.js",
+			"js/text-slider.js",
+			"js/map.js",
+			"js/navigation.js",
+			"bower_components/bowser/src/bowser.js",
+			"js/check-software.js"
 		]
 	},
 	"autoprefixer": {
@@ -16,5 +34,9 @@
 		],
 		"add": true
 	},
-	"copyright": "/*!\n* Copyrights of all used libraries are written to a file human.txt and is at the root of site\n*/\n\n"
+	"licenses":
+	{
+		"css": "/*!\n * @license\n\n",
+		"js": "/*!\n * @license\n\n"
+	}
 }
